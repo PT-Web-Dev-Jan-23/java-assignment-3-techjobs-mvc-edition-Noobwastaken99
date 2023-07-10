@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head">
+<!--    <style>-->
+<!--        #extra {-->
+<!--            background: lightblue;-->
+<!--            padding: 50px;-->
+<!--        }-->
+<!--    </style>-->
 </head>
 <body>
 
@@ -13,23 +19,58 @@
     <form th:action="@{/search/results}" method = "post">
         <h2>Search by:</h2>
 
-        <p>
-            <span th:each="column : ${columns}">
-                <input
-                        type="radio"
-                        name="searchType"
-                        th:id="${column.key}"
-                        th:value="${column.key}"
-                        th:checked="${column.key == 'all'}"/>
-                <label th:for="${column.key}" th:text="${column.value}"></label>
-            </span>
+<!--        <p>-->
+<!--            <span th:each="column : ${columns}">-->
+<!--                <input-->
+<!--                        type="radio"-->
+<!--                        name="searchType"-->
+<!--                        th:id="${column.key}"-->
+<!--                        th:value="${column.key}"-->
+<!--                        th:checked="${column.key == 'all'}"/>-->
+<!--                <label th:for="${column.key}" th:text="${column.value}"></label>-->
+<!--            </span>-->
 
-        </p>
+<!--        </p>-->
 
+<!--        <p>-->
+<!--            <select name="searchType" th:id="${columns}">-->
+<!--                <option th:each="column : ${columns}" th:value="${column.key}" th:text="${column.value}">-->
+<!--                </option>-->
+<!--            </select>-->
+<!--        </p>-->
         <p>
+            <select name="searchType" th:id="${columns}">-->
+                <option th:each="column : ${columns}" th:value="${column.key}" th:text="${column.value}">
+                </option>
+            </select>
             <label for="searchTerm">Keyword:</label>
             <input type="text" name="searchTerm" id="searchTerm" />
+
         </p>
+<!--        <div id="extra" main="extra">-->
+<!--            <p>HELLO WORLD!</p>-->
+<!--&lt;!&ndash;            <select name="searchType" th:id="${columns}">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                <option th:each="column : ${columns}" th:value="${column.key}" th:text="${column.value}">&ndash;&gt;-->
+<!--&lt;!&ndash;                </option>&ndash;&gt;-->
+<!--&lt;!&ndash;            </select>&ndash;&gt;-->
+<!--&lt;!&ndash;            <label for="searchTermTwo">Keyword:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;            <input type="text" name="searchTermTwo" id="searchTermTwo" />&ndash;&gt;-->
+<!--        </div>-->
+<!--        <button onclick="hideShow()">Hide/Show</button>-->
+<!--        <script>-->
+<!--            var div = document.getElementByID('extra');-->
+<!--            var display = 0;-->
+
+<!--            function hideShow() {-->
+<!--                if (display == 1) {-->
+<!--                    div.style.display = 'block';-->
+<!--                    display = 0;-->
+<!--                } else {-->
+<!--                    div.style.display = 'none';-->
+<!--                    display = 1;-->
+<!--                }-->
+<!--            }-->
+<!--        </script>-->
 
         <input type="submit" value="Search" />
     </form>
@@ -37,6 +78,32 @@
     <hr />
 
     <!-- TODO #4 - Loop over the search results to display all job fields. -->
+    <table th:each="job : ${jobs}" class="job-listing">
+        <tr>
+            <td>ID</td>
+            <td th:text="${job.id}"></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td th:text="${job.name}"></td>
+        </tr>
+        <tr>
+            <td>Employer</td>
+            <td th:text="${job.employer}"></td>
+        </tr>
+        <tr>
+            <td>Location</td>
+            <td th:text="${job.location}"></td>
+        </tr>
+        <tr>
+            <td>Position Type</td>
+            <td th:text="${job.positionType}"></td>
+        </tr>
+        <tr>
+            <td>Skill</td>
+            <td th:text="${job.coreCompetency}"></td>
+        </tr>
+    </table>
 
 </div>
 
